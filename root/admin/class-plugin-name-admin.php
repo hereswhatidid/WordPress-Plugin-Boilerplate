@@ -1,32 +1,19 @@
 <?php
 /**
- * Plugin Name.
+ * {%= package_name %}.
  *
- * @package   Plugin_Name_Admin
- * @author    Your Name <email@example.com>
+ * @package   {%= package_name %}_Admin
+ * @author    {%= author_name %} <{%= author_email }>
  * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2014 Your Name or Company Name
+ * @link      {%= homepage %}
+ * @copyright 2014 {%= author_name %}
  */
-
-/**
- * Plugin class. This class should ideally be used to work with the
- * administrative side of the WordPress site.
- *
- * If you're interested in introducing public-facing
- * functionality, then refer to `class-plugin-name.php`
- *
- * @TODO: Rename this class to a proper name for your plugin.
- *
- * @package Plugin_Name_Admin
- * @author  Your Name <email@example.com>
- */
-class Plugin_Name_Admin {
+class {%= package_name %}_Admin {
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @var      object
 	 */
@@ -35,7 +22,7 @@ class Plugin_Name_Admin {
 	/**
 	 * Slug of the plugin screen.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @var      string
 	 */
@@ -45,7 +32,7 @@ class Plugin_Name_Admin {
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
-	 * @since     1.0.0
+	 * @since     {%= version %}
 	 */
 	private function __construct() {
 
@@ -58,15 +45,7 @@ class Plugin_Name_Admin {
 			return;
 		} */
 
-		/*
-		 * Call $plugin_slug from public plugin class.
-		 *
-		 * @TODO:
-		 *
-		 * - Rename "Plugin_Name" to the name of your initial plugin class
-		 *
-		 */
-		$plugin = Plugin_Name::get_instance();
+		$plugin = {%= package_name %}::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Load admin style sheet and JavaScript.
@@ -82,9 +61,6 @@ class Plugin_Name_Admin {
 
 		/*
 		 * Define custom functionality.
-		 *
-		 * Read more about actions and filters:
-		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
 		add_action( '@TODO', array( $this, 'action_method_name' ) );
 		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
@@ -94,7 +70,7 @@ class Plugin_Name_Admin {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
+	 * @since     {%= version %}
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -120,11 +96,7 @@ class Plugin_Name_Admin {
 	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @TODO:
-	 *
-	 * - Rename "Plugin_Name" to the name your plugin
-	 *
-	 * @since     1.0.0
+	 * @since     {%= version %}
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
@@ -136,7 +108,7 @@ class Plugin_Name_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Plugin_Name::VERSION );
+			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), {%= package_name %}::VERSION );
 		}
 
 	}
@@ -144,11 +116,7 @@ class Plugin_Name_Admin {
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
-	 * @TODO:
-	 *
-	 * - Rename "Plugin_Name" to the name your plugin
-	 *
-	 * @since     1.0.0
+	 * @since     {%= version %}
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
@@ -160,7 +128,7 @@ class Plugin_Name_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Plugin_Name::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), {%= package_name %}::VERSION );
 		}
 
 	}
@@ -168,23 +136,12 @@ class Plugin_Name_Admin {
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function add_plugin_admin_menu() {
 
 		/*
 		 * Add a settings page for this plugin to the Settings menu.
-		 *
-		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
-		 *
-		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
-		 * @TODO:
-		 *
-		 * - Change 'Page Title' to the title of your plugin admin page
-		 * - Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * - Change 'manage_options' to the capability you see fit
-		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
 			__( 'Page Title', $this->plugin_slug ),
@@ -199,7 +156,7 @@ class Plugin_Name_Admin {
 	/**
 	 * Render the settings page for this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function display_plugin_admin_page() {
 		include_once( 'views/admin.php' );
@@ -208,7 +165,7 @@ class Plugin_Name_Admin {
 	/**
 	 * Add settings action link to the plugins page.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function add_action_links( $links ) {
 
@@ -222,26 +179,15 @@ class Plugin_Name_Admin {
 	}
 
 	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
 	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function action_method_name() {
 		// @TODO: Define your action hook callback here
 	}
 
 	/**
-	 * NOTE:     Filters are points of execution in which WordPress modifies data
-	 *           before saving it or sending it to the browser.
-	 *
-	 *           Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function filter_method_name() {
 		// @TODO: Define your filter hook callback here

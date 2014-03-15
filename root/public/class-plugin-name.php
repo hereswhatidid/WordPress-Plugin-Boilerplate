@@ -1,40 +1,25 @@
 <?php
 /**
- * Plugin Name.
+ * {%= package_name %}.
  *
- * @package   Plugin_Name
- * @author    Your Name <email@example.com>
+ * @package   {%= package_name %}
+ * @author    {%= author_name %} <{%= author_email }>
  * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2014 Your Name or Company Name
+ * @link      {%= homepage %}
+ * @copyright 2014 {%= author_name %}
  */
-
-/**
- * Plugin class. This class should ideally be used to work with the
- * public-facing side of the WordPress site.
- *
- * If you're interested in introducing administrative or dashboard
- * functionality, then refer to `class-plugin-name-admin.php`
- *
- * @TODO: Rename this class to a proper name for your plugin.
- *
- * @package Plugin_Name
- * @author  Your Name <email@example.com>
- */
-class Plugin_Name {
+class {%= package_name %} {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   1.0.0
+	 * @since   {%= version %}
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '{%= version %}';
 
 	/**
-	 * @TODO - Rename "plugin-name" to the name your your plugin
-	 *
 	 * Unique identifier for your plugin.
 	 *
 	 *
@@ -42,16 +27,16 @@ class Plugin_Name {
 	 * of text. Its value should match the Text Domain file header in the main
 	 * plugin file.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'plugin-name';
+	protected $plugin_slug = {%= slug %};
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @var      object
 	 */
@@ -61,7 +46,7 @@ class Plugin_Name {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     1.0.0
+	 * @since     {%= version %}
 	 */
 	private function __construct() {
 
@@ -75,9 +60,7 @@ class Plugin_Name {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-		/* Define custom functionality.
-		 * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
+//		Define custom functionality
 		add_action( '@TODO', array( $this, 'action_method_name' ) );
 		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
@@ -86,7 +69,7 @@ class Plugin_Name {
 	/**
 	 * Return the plugin slug.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @return    Plugin slug variable.
 	 */
@@ -97,7 +80,7 @@ class Plugin_Name {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
+	 * @since     {%= version %}
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -114,7 +97,7 @@ class Plugin_Name {
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Activate" action, false if
@@ -151,7 +134,7 @@ class Plugin_Name {
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Deactivate" action, false if
@@ -189,7 +172,7 @@ class Plugin_Name {
 	/**
 	 * Fired when a new site is activated with a WPMU environment.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @param    int    $blog_id    ID of the new blog.
 	 */
@@ -211,7 +194,7 @@ class Plugin_Name {
 	 * - not spam
 	 * - not deleted
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 *
 	 * @return   array|false    The blog ids, false if no matches.
 	 */
@@ -231,7 +214,7 @@ class Plugin_Name {
 	/**
 	 * Fired for each blog when the plugin is activated.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	private static function single_activate() {
 		// @TODO: Define activation functionality here
@@ -240,7 +223,7 @@ class Plugin_Name {
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	private static function single_deactivate() {
 		// @TODO: Define deactivation functionality here
@@ -249,7 +232,7 @@ class Plugin_Name {
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function load_plugin_textdomain() {
 
@@ -264,7 +247,7 @@ class Plugin_Name {
 	/**
 	 * Register and enqueue public-facing style sheet.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
@@ -273,33 +256,21 @@ class Plugin_Name {
 	/**
 	 * Register and enqueues public-facing JavaScript files.
 	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
 	}
 
 	/**
-	 * NOTE:  Actions are points in the execution of a page or process
-	 *        lifecycle that WordPress fires.
-	 *
-	 *        Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function action_method_name() {
 		// @TODO: Define your action hook callback here
 	}
 
 	/**
-	 * NOTE:  Filters are points of execution in which WordPress modifies data
-	 *        before saving it or sending it to the browser.
-	 *
-	 *        Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
+	 * @since    {%= version %}
 	 */
 	public function filter_method_name() {
 		// @TODO: Define your filter hook callback here
