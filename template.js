@@ -49,7 +49,7 @@ exports.template = function( grunt, init, done ) {
 		{
 			name: 'css_type',
 			message: 'CSS Preprocessor: Will you use "Sass", "LESS", or "none" for CSS with this project?',
-			default: 'Sass'
+			default: 'LESS'
 		},
 		{
 			name: 'menutext',
@@ -70,12 +70,8 @@ exports.template = function( grunt, init, done ) {
 
 		// Sanitize names where we need to for PHP/JS
 		props.name = props.title.replace( /\s+/g, '-' ).toLowerCase();
-		// Development prefix (i.e. to prefix PHP function names, variables)
-		props.prefix = props.prefix.replace('/[^a-z_]/i', '').toLowerCase();
-		// Development prefix in all caps (e.g. for constants)
-		props.prefix_caps = props.prefix.toUpperCase();
 		// An additional value, safe to use as a JavaScript identifier.
-		props.js_safe_name = props.name.replace(/[\W_]+/g, '_').replace(/^(\d)/, '_$1');
+		props.js_safe_name = props.name.replace(/[\W_]+/g, '-').replace(/^(\d)/, '-$1');
 		// An additional value that won't conflict with NodeUnit unit tests.
 		props.js_test_safe_name = props.js_safe_name === 'test' ? 'myTest' : props.js_safe_name;
 		props.js_safe_name_caps = props.js_safe_name.toUpperCase();
@@ -85,16 +81,20 @@ exports.template = function( grunt, init, done ) {
 
 		switch( props.css_type.toLowerCase()[0] ) {
 			case 'l':
-				delete files[ 'admin/assets/css/sass/' + props.js_safe_name + '.scss'];
-				delete files[ 'admin/assets/css/src/' + props.js_safe_name + '.css' ];
+				delete files[ 'admin/assets/css/sass/admin.scss'];
+				delete files[ 'public/assets/css/sass/public.scss'];
+				delete files[ 'admin/assets/css/sass/'];
+				delete files[ 'public/assets/css/sass/'];
 
 				props.devDependencies["grunt-contrib-less"] = "~0.9.0";
 				props.css_type = 'less';
 				break;
 			case 'n':
 			case undefined:
-				delete files[ 'admin/assets/css/less/' + props.js_safe_name + '.less'];
-				delete files[ 'admin/assets/css/sass/' + props.js_safe_name + '.scss'];
+				delete files[ 'admin/assets/css/less/admin.less'];
+				delete files[ 'public/assets/css/less/public.less'];
+				delete files[ 'admin/assets/css/less/'];
+				delete files[ 'public/assets/css/less/'];
 
 				props.css_type = 'none';
 				break;

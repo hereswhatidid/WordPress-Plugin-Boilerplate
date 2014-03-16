@@ -6,7 +6,7 @@
  * also follow WordPress Coding Standards and PHP best practices.
  *
  * @package   {%= package_name %}
- * @author    {%= author_name %} <{%= author_email }>
+ * @author    {%= author_name %} <{%= author_email %}>
  * @license   GPL-2.0+
  * @link      http://example.com
  * @copyright 2014 {%= author_name %}
@@ -19,7 +19,7 @@
  * Author:      {%= author_name %}
  * Author URI:  {%= author_url %}
  * License:     GPLv2+
- * Text Domain: {%= prefix %}
+ * Text Domain: {%= slug %}
  * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/<owner>/<repo>
  */
@@ -33,7 +33,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Public-Facing Functionality
  *----------------------------------------------------------------------------*/
 
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-root.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-{%= js_safe_name %}.php' );
 
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.

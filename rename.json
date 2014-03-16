@@ -1,5 +1,5 @@
 {
 	"plugin-name.php": "{%= js_safe_name %}.php",
 	"public/class-plugin-name.php": "public/class-{%= js_safe_name %}.php",
-	"admin/class-plugin-name.php": "admin/class-{%= js_safe_name %}.php"
+	"admin/class-plugin-name-admin.php": "admin/class-{%= js_safe_name %}-admin.php"
 }

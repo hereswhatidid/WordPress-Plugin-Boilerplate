@@ -3,7 +3,7 @@
  * {%= package_name %}.
  *
  * @package   {%= package_name %}
- * @author    {%= author_name %} <{%= author_email }>
+ * @author    {%= author_name %} <{%= author_email %}>
  * @license   GPL-2.0+
  * @link      {%= homepage %}
  * @copyright 2014 {%= author_name %}
@@ -32,6 +32,15 @@ class {%= package_name %} {
 	 * @var      string
 	 */
 	protected $plugin_slug = {%= slug %};
+
+	/**
+	 * Minified or verbose display of scripts and styles
+	 *
+	 * @since	{%= version %}
+	 *
+	 * @var		string
+	 */
+	protected $script_mode = 'min';
 
 	/**
 	 * Instance of this class.
@@ -64,6 +73,10 @@ class {%= package_name %} {
 		add_action( '@TODO', array( $this, 'action_method_name' ) );
 		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
+		if ( defined( 'SCRIPT_DEBUG' ) && ( true === SCRIPT_DEBUG ) ) {
+			$this->script_mode = 'dev';
+		}
+
 	}
 
 	/**
@@ -75,6 +88,18 @@ class {%= package_name %} {
 	 */
 	public function get_plugin_slug() {
 		return $this->plugin_slug;
+	}
+
+	/**
+	 * Return the script mode.
+	 *
+	 * @since    {%= version %}
+	 *
+	 * @return    Plugin slug variable.
+	 */
+	public function get_script_mode()
+	{
+		return $this->script_mode;
 	}
 
 	/**
@@ -250,7 +275,7 @@ class {%= package_name %} {
 	 * @since    {%= version %}
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
+		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.' . $this->script_mode . '.css', __FILE__ ), array(), self::VERSION );
 	}
 
 	/**
@@ -259,7 +284,7 @@ class {%= package_name %} {
 	 * @since    {%= version %}
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.' . $this->script_mode . '.js', __FILE__ ), array( 'jquery' ), self::VERSION );
 	}
 
 	/**

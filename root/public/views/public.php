@@ -6,7 +6,7 @@
  * frontend of the theme when the plugin is activated.
  *
  * @package   {%= package_name %}
- * @author    {%= author_name %} <{%= author_email }>
+ * @author    {%= author_name %} <{%= author_email %}>
  * @license   GPL-2.0+
  * @link      {%= homepage %}
  * @copyright 2014 {%= author_name %}

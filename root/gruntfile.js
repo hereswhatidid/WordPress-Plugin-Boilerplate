@@ -153,9 +153,9 @@ module.exports = function(grunt) {
 		'clean',
 		'uglify',
 		{% if ('sass' === css_type) { %}
-		'less'
-		{% } else if ('less' === css_type) { %}
 		'sass'
+		{% } else if ('less' === css_type) { %}
+		'less'
 		{% } %}
 	]);
 
@@ -164,9 +164,9 @@ module.exports = function(grunt) {
 		'clean',
 		'uglify:production',
 		{% if ('sass' === css_type) { %}
-		'less:production'
-		{% } else if ('less' === css_type) { %}
 		'sass:production'
+		{% } else if ('less' === css_type) { %}
+		'less:production'
 		{% } %}
 	]);
 

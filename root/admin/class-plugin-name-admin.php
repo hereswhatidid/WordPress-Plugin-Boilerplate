@@ -3,7 +3,7 @@
  * {%= package_name %}.
  *
  * @package   {%= package_name %}_Admin
- * @author    {%= author_name %} <{%= author_email }>
+ * @author    {%= author_name %} <{%= author_email %}>
  * @license   GPL-2.0+
  * @link      {%= homepage %}
  * @copyright 2014 {%= author_name %}
@@ -24,7 +24,7 @@ class {%= package_name %}_Admin {
 	 *
 	 * @since    {%= version %}
 	 *
-	 * @var      string
+	 * @var      stringmenutext
 	 */
 	protected $plugin_screen_hook_suffix = null;
 
@@ -47,6 +47,7 @@ class {%= package_name %}_Admin {
 
 		$plugin = {%= package_name %}::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
+		$this->script_mode = $plugin->get_script_mode();
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -108,7 +109,7 @@ class {%= package_name %}_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), {%= package_name %}::VERSION );
+			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.' . $this->script_mode . '.css', __FILE__ ), array(), {%= package_name %}::VERSION );
 		}
 
 	}
@@ -128,7 +129,7 @@ class {%= package_name %}_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), {%= package_name %}::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.' . $this->script_mode . '.js', __FILE__ ), array( 'jquery' ), {%= package_name %}::VERSION );
 		}
 
 	}
@@ -144,8 +145,8 @@ class {%= package_name %}_Admin {
 		 * Add a settings page for this plugin to the Settings menu.
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Page Title', $this->plugin_slug ),
-			__( 'Menu Text', $this->plugin_slug ),
+			__( '{%= title %}', $this->plugin_slug ),
+			__( '{%= menutext %}', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
